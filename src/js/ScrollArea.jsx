@@ -124,7 +124,26 @@ export default class ScrollArea extends React.Component{
             warnAboutElementChild();
         }
 
-        let classes = 'scrollarea ' + (className || '');
+        let shadowClasses = '';
+        if (this.canScrollY()){
+            let scrollable = this.state.realHeight - this.state.containerHeight;
+            if (this.state.topPosition === 0){
+                shadowClasses += 'scroll-top ';
+            } else if (this.state.topPosition === scrollable){
+                shadowClasses += 'scroll-bottom ';
+            }
+        }
+
+        if (this.canScrollX()){
+            let scrollable = this.state.realWidth - this.state.containerWidth;
+            if (this.state.leftPosition === 0){
+                shadowClasses += 'scroll-left ';
+            } else if (this.state.leftPosition === scrollable){
+                shadowClasses += 'scroll-right ';
+            }
+        }
+
+        let classes = shadowClasses + 'scrollarea ' + (className || '');
         let contentClasses = 'scrollarea-content ' + (contentClassName || '');
         
         let contentStyle = {
@@ -136,18 +155,20 @@ export default class ScrollArea extends React.Component{
         return (
             <Motion style={{...this.props.contentStyle, ...springifiedContentStyle}}>
                 { style => 
-                    <div ref={x => this.wrapper = x} style={this.props.style} className={classes} onWheel={this.handleWheel.bind(this)}>
-                        <div ref={x => this.content = x}
-                            style={style}
-                            className={contentClasses}
-                            onTouchStart={this.handleTouchStart.bind(this)}
-                            onTouchMove={this.handleTouchMove.bind(this)}
-                            onTouchEnd={this.handleTouchEnd.bind(this)}>
-                    {children}
-                </div>
-                {scrollbarY}
-                {scrollbarX}
-            </div>
+                    <div className={classes}>
+                        <div ref={x => this.wrapper = x} style={this.props.style} className='scrollarea-inner' onWheel={this.handleWheel.bind(this)}>
+                            <div ref={x => this.content = x}
+                                style={style}
+                                className={contentClasses}
+                                onTouchStart={this.handleTouchStart.bind(this)}
+                                onTouchMove={this.handleTouchMove.bind(this)}
+                                onTouchEnd={this.handleTouchEnd.bind(this)}>
+                                    {children}
+                            </div>
+                            {scrollbarY}
+                            {scrollbarX}
+                        </div>
+                    </div>
                 }
             </Motion>
         );
