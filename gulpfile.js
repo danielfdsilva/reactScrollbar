@@ -45,7 +45,7 @@ gulp.task('less', function(){
         .pipe(gulp.dest('./dist/css/'));
 });
 
-var folders = ['basic', 'changingChildren'];
+var folders = ['basic', 'changingChildren', 'nested'];
 gulp.task('build-examples', function(){
     var tasks = folders.map(function(folder){
         return gulp.src('examples/' + folder + '/js/main.js', {base: './'})
@@ -83,7 +83,7 @@ gulp.task('production', function(callback){
 
 gulp.task('watch', function() {
     connect.server({
-       root: 'examples/basic',
+       root: 'examples/nested',
        livereload: true,
        port: 8003
      });
