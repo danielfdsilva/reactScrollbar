@@ -5,11 +5,7 @@
 
 Simple ScrollArea component built for [React](http://facebook.github.io/react/).
 
-[Demo](http://souhe.github.io/reactScrollbar)
-
-```bash
-npm install react-scrollbar --save
-```
+[Demo (outdated)](http://souhe.github.io/reactScrollbar)
 
 React Scrollbar requires **React 0.13 or later**
 
