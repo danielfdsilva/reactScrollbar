@@ -1,7 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import ScrollArea from 'react-scrollbar';
 
-class App extends React.Component{
+class ChangingChildren extends React.Component{
     constructor(props){
         super(props);
 
@@ -52,31 +53,31 @@ class Content extends React.Component {
                 <button onClick={this.handleAddButtonClick.bind(this)} >Add 10</button>
                 <button onClick={this.handleRemoveButtonClick.bind(this)} >Remove 10</button>
                 <button onClick={this.handleScrollTopButtonClick.bind(this)} > Scroll Top </button>
-                
+
             </div>
         );
     }
-    
+
     handleScrollTopButtonClick() {
         this.context.scrollArea.scrollTop();
     }
-    
+
     handleScrollBottomButtonClick() {
         this.context.scrollArea.scrollBottom();
     }
-    
+
     handleScroll100ButtonClick() {
         this.context.scrollArea.scrollXTo(100);
     }
-    
+
     handleScrollLeftButtonClick() {
         this.context.scrollArea.scrollLeft();
     }
-    
+
     handleScrollRightButtonClick() {
         this.context.scrollArea.scrollRight();
     }
-    
+
     handleScrollY40ButtonClick() {
         this.context.scrollArea.scrollYTo(40);
     }
@@ -91,7 +92,7 @@ class Content extends React.Component {
 }
 
 Content.contextTypes = {
-    scrollArea: React.PropTypes.object
+    scrollArea: PropTypes.object,
 };
 
-export default App;
+export default ChangingChildren;
